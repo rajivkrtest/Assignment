@@ -19,6 +19,7 @@
 #pragma mark -
 @implementation IconDownloader
 
+//Function to start the icon download
 - (void)startDownload
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.row.imageHref]];
@@ -58,7 +59,7 @@
         [self.sessionTask resume];
 
     }
-    else {
+    else {//Fallback to NSURLConnection
         
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"

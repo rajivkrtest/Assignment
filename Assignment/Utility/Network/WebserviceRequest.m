@@ -25,7 +25,7 @@
     return request;
     
 }
-
+//Check the network is reachable or not
 -(BOOL)reachable {
     Reachability *r = [Reachability reachabilityWithHostname:@"www.google.com"];
     NetworkStatus internetStatus = [r currentReachabilityStatus];
@@ -35,6 +35,7 @@
     return YES;
 }
 
+//Call the list of facts from WS
 -(void)callFacts:(void (^)(NSString *title, NSArray* rows, NSError *err))completion errorHandler:(void (^)(NSError *err))error {
     //Check if network is Reachable
     if([self reachable]) {
@@ -53,7 +54,6 @@
             NSURLSessionDataTask * task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                 //If data is Nil then throw error
                 if (data != nil) {
-                    
                     [[Parser shared] parse:data completion:^(NSString *title, NSArray *rows, BOOL isError) {
                         if (isError == TRUE) {
                             NSError *error = [NSError errorWithDomain:kEndpointURL code:404 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"No Records Found", NSLocalizedDescriptionKey, nil]];
@@ -68,29 +68,6 @@
                             }
                         }
                     }];
-//                    //Need to convert data into string because WS data is in NSASCIIStringEncoding format
-//                    //and NSJSONSerialization will expect NSUTF8StringEncoding format
-//                    NSString *cr = [[NSString alloc] initWithBytes:[data bytes] length:data.length encoding:NSASCIIStringEncoding];
-//                    // This converts the string to an NSData object
-//                    NSData *data = [cr dataUsingEncoding:NSUTF8StringEncoding];
-//                    // convert to an object
-//                    NSError * jsonError;
-//                    NSDictionary * jsonObject = (NSDictionary *)[NSJSONSerialization JSONObjectWithData:data
-//                                                                                                options:NSJSONReadingAllowFragments
-//                                                                                                  error: &jsonError];
-//
-//                    dispatch_async(dispatch_get_main_queue(), ^(void){
-//                        if (jsonObject != nil) {
-//                            FactsResponse *factsResponse = [[FactsResponse alloc] initWithDictionary:jsonObject];
-//                            completion(factsResponse.title, factsResponse.rows, nil);
-//                        }
-//                        else {
-//                            NSError *error = [NSError errorWithDomain:kEndpointURL code:404 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"No Records Found", NSLocalizedDescriptionKey, nil]];
-//                            if (completion != nil){
-//                                completion(nil, nil, error);
-//                            }
-//                        }
-//                    });
                 }
                 else {
 

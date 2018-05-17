@@ -10,12 +10,17 @@
 
 @implementation AppHelper
 
+//Function to show the Alert on controller
+//controller: Pass the current view controller to display alert
+//title: Show the alert title
+//message: Show the alert message
 +(void)showAlert:(UIViewController*)controller title:(NSString*)title message:(NSString*)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil]];
     [controller presentViewController:alert animated:YES completion:nil];
 }
 
+//Function to check the empty string
 +(BOOL)isEmpty:(NSString*)string {
     if(string == (id) [NSNull null] ||
        [string length] == 0 ||
@@ -27,7 +32,9 @@
     return FALSE;
 }
 
-
+//Function to resize the image
+//image: Source Image
+//size: Width of the image
 +(UIImage*)resizeImage:(UIImage*)image size:(CGFloat)size {
     CGSize itemSize = CGSizeMake(size, size);
     UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0f);

@@ -111,10 +111,12 @@
 {
     return 1;
 }
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.arrayFacts count];
 }
+
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"TableViewCellIdentifier";
@@ -136,7 +138,6 @@
             cell.imageHref.image = row.icon;
         }
     }
-    
     if ([AppHelper isEmpty:row.title] == TRUE) {
         cell.lblTitle.text = @"No Title";
     }
@@ -172,7 +173,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:TRUE];
 }
-
 
 -(void)dealloc {
     self.tableView = nil;
