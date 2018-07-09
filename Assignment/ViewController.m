@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+    //Change background color
     self.view.backgroundColor = [UIColor whiteColor];
     self.imageDownloadsInProgress = [NSMutableDictionary dictionary];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
